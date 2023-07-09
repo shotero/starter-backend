@@ -4,12 +4,31 @@
   },
   "imports": {
     "@/": "./",
-    "oak": "https://deno.land/x/oak@v12.1.0/mod.ts",
-    "std/": "https://deno.land/std@0.183.0/",
-    "eta": "https://deno.land/x/eta@v2.0.1/mod.ts",
-    "jose": "https://deno.land/x/jose@v4.14.0/index.ts",
-    "pino": "npm:pino@8.11.0",
-    "pino-loki": "npm:pino-loki@2.0.4",
-    "pino-pretty": "npm:pino-pretty@10.0.0"
+    "oak": "https://deno.land/x/oak@v12.6.0/mod.ts",
+    "std/": "https://deno.land/std@0.193.0/",
+    "eta": "https://deno.land/x/eta@v3.0.3/mod.ts",
+    "jose": "https://deno.land/x/jose@v4.14.4/index.ts",
+    "pino": "npm:pino@8.14.1",
+    "pino-loki": "npm:pino-loki@2.1.3",
+    "pino-pretty": "npm:pino-pretty@10.0.1"
+  },
+  "lint": {
+    "include": ["."],
+    "exclude": [],
+    "rules": {
+      "tags": ["recommended"],
+      "include": ["ban-untagged-todo"],
+      "exclude": ["no-unused-vars"]
+    }
+  },
+  "fmt": {
+    "useTabs": false,
+    "lineWidth": 80,
+    "indentWidth": 2,
+    "semiColons": true,
+    "singleQuote": true,
+    "proseWrap": "preserve",
+    "include": ["."],
+    "exclude": []
   }
 }
