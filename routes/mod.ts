@@ -1,9 +1,9 @@
-import { Router } from "oak";
-import { postsRouter } from "@/routes/posts/mod.ts";
+import { Router } from 'oak';
+import { postsRouter } from '@/routes/posts/mod.ts';
 
 const router = new Router();
 
-router.use("/posts", postsRouter.routes());
+router.use('/posts', postsRouter.routes());
 
 export { router };
 

@@ -1,5 +1,5 @@
-import { pino } from "pino";
-import pinoPretty from "pino-pretty";
+import { pino } from 'pino';
+import pinoPretty from 'pino-pretty';
 
 // const transport = pino.transport({
 //   target: 'pino-pretty',

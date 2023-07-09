@@ -1,5 +1,5 @@
-import { logger } from "@/logger.ts";
-import { Status } from "oak";
+import { logger } from '@/logger.ts';
+import { Status } from 'oak';
 
 async function loggingMiddleware(ctx, next) {
   await next();

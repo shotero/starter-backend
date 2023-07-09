@@ -1,6 +1,6 @@
-import { Application } from "oak";
-import { router } from "@/routes/mod.ts";
-import { registerMiddlewares } from "@/middlewares.ts";
+import { Application } from 'oak';
+import { router } from '@/routes/mod.ts';
+import { registerMiddlewares } from '@/middlewares.ts';
 
 const app = new Application();
 
