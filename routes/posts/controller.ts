@@ -1,6 +1,7 @@
 import { logger } from '@/logger.ts';
+import { type Context } from 'oak';
 
-export function get(context) {
+export function get(context: Context) {
   try {
     return context.response.body = 'hello';
   } catch (err) {
@@ -8,10 +9,10 @@ export function get(context) {
   }
 }
 
-export function post(context) {
-  throw new Error('test');
+export function post(context: Context) {
+  // throw new Error('test');
   try {
-    return context.response.body = 'hello';
+    context.response.body = 'hello';
   } catch (err) {
     logger.error(err);
   }

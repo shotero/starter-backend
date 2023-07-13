@@ -1,14 +1,20 @@
 import { logger } from '@/logger.ts';
-import { Status } from 'oak';
+import { type Application, type Context, type Next } from 'oak';
 
-async function loggingMiddleware(ctx, next) {
-  await next();
-  logger.info(
-    `${ctx.request.method} - ${ctx.request.url}: ${ctx.response.status} - ${ctx.response.body}`,
-  );
+async function loggingMiddleware(ctx: Context, next: Next) {
+  try {
+    await next();
+    logger.info(
+      `${ctx.request.method} - ${ctx.request.url}: ${ctx.response.status} - ${
+        String(ctx.response.body)
+      }`,
+    );
+  } catch (error) {
+    throw error;
+  }
 }
 
-async function errorHandler(ctx, next) {
+async function errorHandler(ctx: Context, next: Next) {
   try {
     await next();
   } catch (e) {
@@ -17,7 +23,7 @@ async function errorHandler(ctx, next) {
   }
 }
 
-export function registerMiddlewares(app) {
+export function registerMiddlewares(app: Application) {
   app.use(loggingMiddleware);
   app.use(errorHandler);
 }
