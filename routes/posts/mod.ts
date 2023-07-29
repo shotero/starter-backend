@@ -1,9 +1,9 @@
 import { Router } from 'oak';
-import { get, post } from '@/routes/posts/controller.ts';
+import { post, show } from '@/routes/posts/controller.ts';
 
 const postsRouter = new Router();
 
-postsRouter.get('/', get);
+postsRouter.get('/:id', show);
 postsRouter.post('/', post);
 
 export { postsRouter };
