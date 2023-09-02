@@ -1,10 +1,10 @@
 import type { ColumnType } from "kysely";
 
+export type AuthProvider = "apple" | "google";
+
 export type ChangeType = "CREATE" | "DELETE" | "UPDATE";
 
-export type EventType = "BIRTH" | "DEATH" | "MARRIAGE" | "RELOCATION" | "SCHOOL" | "SEPARATION" | "STORY" | "TRAVEL" | "WORK";
-
-export type Gender = "female" | "male";
+export type Gender = "female" | "male" | "trans";
 
 export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
   ? ColumnType<S, I | undefined, U>
@@ -24,7 +24,7 @@ export type JsonValue = JsonArray | JsonObject | JsonPrimitive;
 
 export type Timestamp = ColumnType<Date, Date | string, Date | string>;
 
-export interface ChangeHistory {
+export interface AdminHistory {
   id: Generated<string>;
   created_at: Generated<Timestamp>;
   created_by: string;
@@ -36,31 +36,25 @@ export interface ChangeHistory {
   diff: Generated<Json>;
 }
 
-export interface ChronicleMedia {
+export interface CommitteeCommittees {
   id: Generated<string>;
   created_at: Generated<Timestamp>;
-  life_event_id: string;
-  url: string | null;
+  name: string;
+  organization_id: string;
 }
 
-export interface Chronicles {
+export interface CommitteeRoles {
   id: Generated<string>;
   created_at: Generated<Timestamp>;
-  person_id: string;
-  organization_id: string | null;
-  school_id: string | null;
-  event_type: EventType;
-  description: string | null;
-  year: number;
-  end_year: number | null;
+  name: string;
+  committee_id: string;
 }
 
-export interface Contacts {
+export interface CommitteeUserRoles {
   id: Generated<string>;
   created_at: Generated<Timestamp>;
-  person_id: string;
-  phone: string | null;
-  email: string | null;
+  user_id: string;
+  role_id: string;
 }
 
 export interface Countries {
@@ -71,6 +65,110 @@ export interface Countries {
   phonecode: string;
   currency: string;
   region: string;
+}
+
+export interface DirectoryBatches {
+  id: Generated<string>;
+  created_at: Generated<Timestamp>;
+  graduating_year: number | null;
+  batch_identifier: string | null;
+  organization_id: string;
+  department_id: string | null;
+  program_id: string | null;
+  forum_id: string | null;
+}
+
+export interface DirectoryBatchPersons {
+  id: Generated<string>;
+  created_at: Generated<Timestamp>;
+  batch_id: string;
+  user_id: string;
+  student_id: string | null;
+}
+
+export interface DirectoryContacts {
+  id: Generated<string>;
+  created_at: Generated<Timestamp>;
+  user_id: string;
+  country_id: string | null;
+  phone: string | null;
+  email: string | null;
+}
+
+export interface DirectoryDepartments {
+  id: Generated<string>;
+  created_at: Generated<Timestamp>;
+  name: string;
+  organization_id: string;
+  faculty_id: string | null;
+}
+
+export interface DirectoryFaculties {
+  id: Generated<string>;
+  created_at: Generated<Timestamp>;
+  name: string;
+  organization_id: string;
+}
+
+export interface DirectoryPrograms {
+  id: Generated<string>;
+  created_at: Generated<Timestamp>;
+  name: string;
+  organization_id: string;
+  faculty_id: string | null;
+}
+
+export interface ForumForums {
+  id: Generated<string>;
+  created_at: Generated<Timestamp>;
+  deleted: Generated<boolean>;
+  name: string;
+  cover_image: string | null;
+}
+
+export interface ForumPosts {
+  id: Generated<string>;
+  created_at: Generated<Timestamp>;
+  thread_id: string;
+  deleted: Generated<boolean>;
+  body: string;
+  votes: Generated<number>;
+  created_by: string;
+  parent_post_id: string | null;
+}
+
+export interface ForumPostVotes {
+  id: Generated<string>;
+  created_at: Generated<Timestamp>;
+  user_id: string;
+  post_id: string;
+  downvote: Generated<boolean>;
+}
+
+export interface ForumThreads {
+  id: Generated<string>;
+  created_at: Generated<Timestamp>;
+  forum_id: string | null;
+  deleted: Generated<boolean>;
+  title: string;
+  body: string;
+  votes: Generated<number>;
+  thread_type_id: string;
+  created_by: string;
+}
+
+export interface ForumThreadTypes {
+  id: Generated<string>;
+  created_at: Generated<Timestamp>;
+  name: string;
+}
+
+export interface ForumThreadVotes {
+  id: Generated<string>;
+  created_at: Generated<Timestamp>;
+  user_id: string;
+  thread_id: string;
+  downvote: Generated<boolean>;
 }
 
 export interface GeographyColumns {
@@ -98,34 +196,10 @@ export interface Organizations {
   created_at: Generated<Timestamp>;
   name: string;
   country_id: string;
-}
-
-export interface Persons {
-  id: Generated<string>;
-  created_at: Generated<Timestamp>;
-  name: string;
-  gender: Gender;
-  preferred_name: string | null;
-  birth_year: number | null;
-  death_year: number | null;
-  country_id: string | null;
   state_id: string | null;
-  user_id: string | null;
-  added_by: string | null;
-}
-
-export interface Relations {
-  id: Generated<string>;
-  created_at: Generated<Timestamp>;
-  parent_id: string;
-  child_id: string;
-}
-
-export interface Schools {
-  id: Generated<string>;
-  created_at: Generated<Timestamp>;
-  name: string;
-  country_id: string;
+  gender_exclusive: Gender | null;
+  has_departments: Generated<boolean>;
+  has_faculties: Generated<boolean>;
 }
 
 export interface SpatialRefSys {
@@ -144,28 +218,54 @@ export interface States {
   location: string | null;
 }
 
+export interface UserAccounts {
+  id: Generated<string>;
+  created_at: Generated<Timestamp>;
+  user_id: string;
+  provider: AuthProvider;
+  email: string;
+  refresh_token: string | null;
+  external_id: string | null;
+}
+
 export interface Users {
   id: Generated<string>;
   created_at: Generated<Timestamp>;
-  login: string;
-  hash: string;
-  login_date: Timestamp | null;
-  prev_login_date: Timestamp | null;
+  full_name: string;
+  picture: string | null;
+  display_name: string | null;
+  bio: string | null;
+  birth_year: number | null;
+  death_year: number | null;
+  country_id: string | null;
+  added_by: string | null;
+  links: Generated<Json>;
+  achievements: Generated<Json>;
 }
 
 export interface DB {
-  change_history: ChangeHistory;
-  chronicle_media: ChronicleMedia;
-  chronicles: Chronicles;
-  contacts: Contacts;
+  "admin.history": AdminHistory;
+  "committee.committees": CommitteeCommittees;
+  "committee.roles": CommitteeRoles;
+  "committee.user_roles": CommitteeUserRoles;
   countries: Countries;
+  "directory.batch_persons": DirectoryBatchPersons;
+  "directory.batches": DirectoryBatches;
+  "directory.contacts": DirectoryContacts;
+  "directory.departments": DirectoryDepartments;
+  "directory.faculties": DirectoryFaculties;
+  "directory.programs": DirectoryPrograms;
+  "forum.forums": ForumForums;
+  "forum.post_votes": ForumPostVotes;
+  "forum.posts": ForumPosts;
+  "forum.thread_types": ForumThreadTypes;
+  "forum.thread_votes": ForumThreadVotes;
+  "forum.threads": ForumThreads;
   geography_columns: GeographyColumns;
   geometry_columns: GeometryColumns;
   organizations: Organizations;
-  persons: Persons;
-  relations: Relations;
-  schools: Schools;
   spatial_ref_sys: SpatialRefSys;
   states: States;
+  user_accounts: UserAccounts;
   users: Users;
 }

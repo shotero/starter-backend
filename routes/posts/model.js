@@ -1,12 +1,16 @@
-import { db } from '@/utils/db.ts';
-// import { Persons } from '@/middlewares/schema.d.ts';
+import { Model } from '@/routes/base/model.js';
 
-export function get(id: string) {
-  return db.selectFrom('persons')
-    .where('id', '=', id)
-    .selectAll()
-    .compile();
+export class Posts extends Model {
+  constructor() {
+    super('forum.posts');
+  }
 }
+// export function get(id: string) {
+//   return db.selectFrom('persons')
+//     .where('id', '=', id)
+//     .selectAll()
+//     .compile();
+// }
 
 // export async function findPeople(criteria: Partial<Persons>) {
 //   let query = db.selectFrom('person');

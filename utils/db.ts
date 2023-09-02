@@ -8,7 +8,13 @@ import {
 
 import { DB } from '@/routes/schema.d.ts';
 
-export const db = new Kysely<DB>({
+import * as pg from 'pg';
+
+export const db = new pg.default.Pool({
+  connectionString: Deno.env.get('DATABASE_URL'),
+});
+
+export const builder = new Kysely<DB>({
   dialect: {
     createAdapter() {
       return new PostgresAdapter();

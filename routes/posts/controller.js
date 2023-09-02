@@ -1,10 +1,12 @@
-import { logger } from '@/middlewares/logger.ts';
-import { RouterContext } from 'oak';
-import { get } from '@/routes/posts/model.ts';
+import { logger } from '@/middlewares/logger.js';
+import { Posts } from '@/routes/posts/model.js';
 
-export function show(context: RouterContext<'/:id'>) {
+const model = new Posts();
+
+export function show(context) {
   try {
-    return (context.response.body = get(context.params.id));
+    console.log(context.params.id);
+    return (context.response.body = model.show(context.params.id));
   } catch (err) {
     logger.error(err);
   }

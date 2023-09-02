@@ -1,6 +1,4 @@
-import { type Context, type Next } from 'oak';
-
-export async function errorHandler(ctx: Context, next: Next) {
+export async function errorHandler(ctx, next) {
   try {
     await next();
   } catch (e) {

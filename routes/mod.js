@@ -1,5 +1,5 @@
 import { Router } from 'oak';
-import { postsRouter } from '@/routes/posts/mod.ts';
+import { postsRouter } from '@/routes/posts/mod.js';
 
 const router = new Router();
 
