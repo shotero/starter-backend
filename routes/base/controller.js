@@ -1,23 +1,23 @@
 import { logger } from '@/middlewares/logger.js';
-import { Model } from '@/routes/base/model.js';
 
 export class BaseController {
-  constructor(table) {
-    this.table = table;
-    this.model = new Model(table);
+  constructor(model) {
+    this.model = model;
   }
 
-  show(context) {
+  async show(context) {
     try {
-      context.response.body = this.model.show(context.params.id);
+      const result = await this.model.show(context.params.id);
+      context.response.body = result.shift();
     } catch (err) {
       logger.error(err);
     }
   }
 
-  list(context) {
+  async list(context) {
     try {
-      context.response.body = this.model.list();
+      const list = await this.model.list();
+      context.response.body = list;
     } catch (err) {
       logger.error(err);
     }

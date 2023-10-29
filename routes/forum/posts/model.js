@@ -1,6 +1,6 @@
 import { Model } from '@/routes/base/model.js';
 
-export class Posts extends Model {
+export class Post extends Model {
   constructor() {
     super('forum.posts');
   }

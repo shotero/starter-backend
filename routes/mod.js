@@ -1,13 +1,8 @@
 import { Router } from 'oak';
-import { postsRouter } from '@/routes/posts/mod.js';
+import { router as postsRouter } from '@/routes/forum/posts/mod.js';
 
 const router = new Router();
 
 router.use('/posts', postsRouter.routes());
 
 export { router };
-
-// export function register(app) {
-//   app.use(posts);
-//   return app;
-// }

@@ -1,12 +1,13 @@
-import { builder, db } from '@/utils/db.ts';
+import { builder, query } from '@/db/db.ts';
 
 export class Model {
   constructor(tablename) {
     this.tablename = tablename;
   }
 
-  list() {
-    return builder.selectFrom(this.tablename).selectAll().compile();
+  async list() {
+    const statement = builder.selectFrom(this.tablename).selectAll().compile();
+    return await query(statement.sql, statement.parameters);
   }
 
   create(data) {
@@ -21,14 +22,12 @@ export class Model {
       .compile();
   }
 
-  show(id) {
-    const query = builder
+  async show(id) {
+    const statement = builder
       .selectFrom(this.tablename)
       .selectAll()
       .where('id', '=', id)
       .compile();
-
-    console.log(query);
-    return db.query(query.sql, query.parameters);
+    return await query(statement.sql, statement.parameters);
   }
 }

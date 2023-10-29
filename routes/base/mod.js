@@ -1,14 +1,12 @@
 import { Router } from 'oak';
-import { BaseController } from '@/routes/base/controller.js';
 
-export function createRouter(table, mountPath) {
+export function createRouter(controller, mountPath) {
   const router = new Router();
-  const controller = new BaseController(table);
 
-  router.get('/:id', controller.show);
-  router.get('/', controller.list);
-  router.put('/:id', controller.update);
-  router.post('/', controller.create);
+  router.get('/:id', controller.show.bind(controller));
+  router.get('/', controller.list.bind(controller));
+  router.put('/:id', controller.update.bind(controller));
+  router.post('/', controller.create.bind(controller));
 
   return router.use(`/${mountPath}`, router.routes());
 }
