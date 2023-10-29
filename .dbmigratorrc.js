@@ -4,8 +4,8 @@ const config = {
   creator: 'demouser',
   db: process.env.DATABASE_URL,
   paths: {
-    up: './migrations/up',
-    down: './migrations/down',
+    up: './db/migrations/up',
+    down: './db/migrations/down',
   },
   migration: {
     schema: 'migration',

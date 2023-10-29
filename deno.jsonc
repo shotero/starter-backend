@@ -1,6 +1,7 @@
 {
   "tasks": {
     "dev": "deno run --allow-read --allow-net --allow-env --allow-sys --watch --allow-write main.js",
+    "debug": "deno run --allow-read --allow-net --allow-env --allow-sys --allow-write --inspect-brk main.js",
     "run": "deno run --allow-read --allow-net --allow-env --allow-sys --allow-write main.js",
     "compile": "deno compile --allow-sys --allow-read --allow-net --allow-write -o dist/jsbackend main.js",
     "gen-schema": "deno run --allow-read --allow-env --allow-net --allow-write --allow-sys npm:kysely-codegen --exclude-pattern 'migration.*' --out-file routes/schema.d.ts --dialect postgres",
