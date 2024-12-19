@@ -23,14 +23,9 @@ jobs:
         with:
           deno-version: v2.x
 
-      - name: Build step
-        run: "cd static && git clone git@github.com:shotero/css.git"
-
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: "csvapp"
-          entrypoint: "main.js"
-          root: ""
-          
-          
+          project: 'csvapp'
+          entrypoint: 'main.js'
+          root: ''
