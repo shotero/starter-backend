@@ -9,14 +9,14 @@ const eta = new Eta({
   views: viewpath,
   cache: true,
   varName: 'state',
-  defaultExtension: '.ejs',
+  defaultExtension: '.ejs'
 });
 
 const app = new Application({
   keys: [crypto.randomUUID()],
   state: {
-    render: eta.render,
-  },
+    render: eta.render
+  }
 });
 
 const router = new Router();
@@ -30,15 +30,15 @@ router.post('/', async (ctx) => {
     const entry = login(passport, password);
     await ctx.cookies.set('passport', entry, {
       httpOnly: true,
-      secure: false, // Set to true in production with HTTPS
+      secure: true, // Set to true in production with HTTPS
       sameSite: 'strict',
       maxAge: 7 * 24 * 60 * 60, // Convert to milliseconds
-      signed: true,
+      signed: true
     });
 
     return ctx.response.redirect('/status');
   } catch (e) {
-    return ctx.response.redirect('/');
+    return ctx.response.redirect('/?error=WRONG_INFO');
   }
 });
 
@@ -47,14 +47,10 @@ router.get('/logout', async (ctx) => {
   ctx.response.redirect('/');
 });
 
-function processData(data) {
-  return data;
-}
-
 router.get('/status', authenticate, async (ctx) => {
   const passportId = await ctx.cookies.get('passport');
   ctx.response.body = eta.render('./status', {
-    user: processData(getByPassport(passportId)),
+    user: getByPassport(passportId)
   });
 });
 
@@ -64,24 +60,10 @@ router.get('/', async (ctx) => {
     ctx.response.redirect('/status');
   }
   ctx.response.body = eta.render('./auth', {
-    passport,
+    error: ctx.request.url.searchParams.get('error'),
+    passport
   });
 });
-
-// app.use(async (context) => {
-//   await context.send({
-//     root: `${Deno.cwd()}/static`,
-//   });
-// });
-
-// router.get('/static/*', async (context, next) => {
-//   const root = `${Deno.cwd()}/static`;
-//   try {
-//     await context.send({ root });
-//   } catch {
-//     next();
-//   }
-// });
 
 app.use(router.routes());
 app.use(router.allowedMethods());
@@ -91,16 +73,22 @@ app.use(async (context, next) => {
   try {
     await context.send({
       root: `${Deno.cwd()}/static`,
-      index: 'index.html',
+      index: 'index.html'
     });
   } catch {
     await next();
   }
 });
 
-app.listen({
-  port: 8000,
-  secure: true,
-  cert: Deno.readTextFileSync('./certs/localhost+1.pem'),
-  key: Deno.readTextFileSync('./certs/localhost+1-key.pem'),
-});
+if (Deno.env.get('ENVIRONMENT') == 'development') {
+  app.listen({
+    port: 8000,
+    secure: true,
+    cert: Deno.readTextFileSync('./certs/localhost+1.pem'),
+    key: Deno.readTextFileSync('./certs/localhost+1-key.pem')
+  });
+} else {
+  app.listen({
+    port: 8000
+  });
+}

@@ -11,5 +11,8 @@
       <input id="password" name="password" type="text" placeholder="Your date of birth in DDMMYYYY format (e.g. 23031998)">
       <button type="submit">Login</button>
   </form>
+  <% if (state.error == 'WRONG_INFO') { %>
+  <span style="color:lightcoral">Wrong login information</span>
+  <% } %>
   </main>
 </section>
