@@ -1,3 +1,5 @@
 .env
 *.db
 dist/
+certs/
+.DS_Store

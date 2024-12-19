@@ -1,0 +1,57 @@
+<% layout("./base") %>
+  <main>
+    <section class="infolist">
+      <ul class="infolist">
+        <li>
+          <label>Name:</label>
+          <div>
+            <%= state.user[3] %>
+          </div>
+        </li>
+        <li>
+          <label>Date of Birth:</label>
+          <div>
+            <%= state.user[5] %>
+          </div>
+        </li>
+        <li>
+          <label>Passport No:</label>
+          <div>
+            <%= state.user[4] %>
+          </div>
+        </li>
+        <li>
+          <label>Passport Expiry</label>
+          <div>
+            <%= state.user[7] %>
+          </div>
+        </li>
+        <li>
+          <label>Age:</label>
+          <div>
+            <%= state.user[6] %>
+          </div>
+        </li>
+        <li>
+          <label>Medical Status:</label>
+          <div>
+            <%= state.user[8] %>
+          </div>
+        </li>
+        <li>
+          <label>Last Status:</label>
+          <div>
+            <%= state.user[15] %>
+          </div>
+        </li>
+        <hr />
+        <li>
+          <label>Updates:</label>
+          <div>
+            <%~ state.user[16].split('\n').join('<br/>') %>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <a href="logout" class="button">Logout</a>
+  </main>

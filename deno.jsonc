@@ -1,22 +1,19 @@
 {
   "tasks": {
-    "dev": "deno run --allow-read --allow-net --allow-env --allow-sys --watch --allow-write main.js",
+    "dev": "deno run --allow-read --allow-net --allow-env --allow-sys --watch=. --allow-write main.js",
     "debug": "deno run --allow-read --allow-net --allow-env --allow-sys --allow-write --inspect-brk main.js",
     "run": "deno run --allow-read --allow-net --allow-env --allow-sys --allow-write main.js",
-    "compile": "deno compile --allow-sys --allow-read --allow-net --allow-write -o dist/jsbackend main.js",
-    "gen-schema": "deno run --allow-read --allow-env --allow-net --allow-write --allow-sys npm:kysely-codegen --exclude-pattern 'migration.*' --out-file routes/schema.d.ts --dialect postgres",
-    "migrate-up": "deno run --allow-env --allow-read --allow-net npm:@shotero/dbmigrator up",
-    "migrate-down": "deno run --allow-env --allow-read --allow-net npm:@shotero/dbmigrator down",
-    "migrate-make": "deno run --allow-env --allow-read --allow-net --allow-write npm:@shotero/dbmigrator make"
+    "compile": "deno compile --allow-sys --allow-read --allow-net --allow-write -o dist/jsbackend main.js"
   },
   "imports": {
     "@/": "./",
-    "oak": "https://deno.land/x/oak@v12.6.0/mod.ts",
-    "std/": "https://deno.land/std@0.200.0/",
-    "eta": "https://deno.land/x/eta@v3.0.3/mod.ts",
-    "jose": "https://deno.land/x/jose@v4.14.4/index.ts",
-    "kysely": "npm:kysely@0.26.2",
-    "pg": "npm:pg@8.11.1"
+    "@eta-dev/eta": "jsr:@eta-dev/eta@^3.5.0",
+    "@oak/oak": "jsr:@oak/oak@^17.1.3",
+    "@std/csv": "jsr:@std/csv@^1.0.4",
+    "@std/json": "jsr:@std/json@^1.0.1",
+    "@std/path": "jsr:@std/path@^1.0.8",
+    "@eta/session": "https://deno.land/x/oak_sessions/mod.ts",
+    "date-fns": "npm:date-fns@^4.1.0"
   },
   "lint": {
     "include": ["."],
