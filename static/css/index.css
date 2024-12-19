@@ -1,0 +1,14 @@
+@import 'reset.css' layer(reset);
+@import 'base.css' layer(base);
+@import 'theme.css' layer(theme);
+@import 'elements.css' layer(elements);
+@import 'layouts.css' layer(layouts);
+@import 'utils.css' layer(utils);
+@import 'components.css' layer(components);
+
+@layer theme {
+  @import 'light.css';
+  @media (prefers-color-scheme: dark) {
+    @import 'dark.css';
+  }
+}

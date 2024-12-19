@@ -1,0 +1,21 @@
+.grouped {
+  display: flex;
+}
+
+.grouped > *:not(:last-child) {
+  margin-right: 16px;
+}
+
+.grouped.gapless > * {
+  margin: 0 0 0 -1px !important;
+  border-radius: 0 !important;
+}
+
+.grouped.gapless > *:first-child {
+  margin: 0 !important;
+  border-radius: 4px 0 0 4px !important;
+}
+
+.grouped.gapless > *:last-child {
+  border-radius: 0 4px 4px 0 !important;
+}

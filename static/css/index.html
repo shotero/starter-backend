@@ -1,0 +1,228 @@
+<html>
+  <head>
+    <title>Demo</title>
+    <link rel="stylesheet" href="index.css" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+  </head>
+
+  <body>
+    <nav class="nav">
+      <section class="brand"></section>
+      <section class="items">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/games">Games</a></li>
+          <li>
+            Communities
+            <ul>
+              <li><a href="/reading">Reading</a></li>
+              <li><a href="/gardening">Gardening</a></li>
+              <li><a href="/parenting">Parenting</a></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+      <section class="end">
+        <search>
+          <form action="./search/">
+            <label for="game">Find a Game</label>
+            <input type="search" id="game" name="q" />
+            <button type="submit">Search</button>
+          </form>
+        </search>
+      </section>
+    </nav>
+
+    <h1>Welcome</h1>
+    <hr />
+    <h2>Typography:</h2>
+    <h1>This is a H1 heading</h1>
+    <h2>This is a H2 heading</h2>
+    <h3>This is a H3 heading</h3>
+    <h4>This is a H4 heading</h4>
+    <h5>This is a H5 heading</h5>
+    <h6>This is a H6 heading</h6>
+    <p>
+      In CSS when using a selector list, if any of the selectors are invalid
+      then the whole list is deemed invalid. When using :is() or :where()
+      instead of the whole list of selectors being deemed invalid if one fails
+      to parse, the incorrect or unsupported selector will be ignored and the
+      others used.
+    </p>
+    <br />
+    <strong>This is a Strong / Bold text</strong>
+    <br />
+    <i>This is an Emphasized / Italic text</i>
+    <br />
+    This is a <mark>Marked / Highlighted</mark> text
+    <br />
+    <small>This is a Small text</small>
+    <br />
+    This is a <del>Deleted</del> text
+    <br />
+    This is a <ins>Underlined / Inserted</ins> text
+    <br />
+    This is a <sub>Subscript</sub> text
+    <br />
+    This is a <sup>Superscript</sup> text
+    <br />
+    <pre>This is a preformatted text.</pre>
+    <blockquote>This is a Blockquote.</blockquote>
+    <samp>This is a sample output.</samp>
+    <br />
+    This is the <code>&lt;code&gt;</code> &amp; <kbd>kbd</kbd>
+    <h3>Links &amp; navigation:</h3>
+    <nav>
+      <a href="#">Nav Link 1</a>
+      <a href="#">Nav Link 2</a>
+      <div class="right">
+        <a href="#">Nav Link 3</a>
+      </div>
+    </nav>
+    <br />
+    <br />
+    <a href="#">Normal link</a>
+    <hr />
+    <h2>Lists:</h2>
+    <ul>
+      <li>Unordered list item 1</li>
+      <li>Unordered list item 2</li>
+      <ul>
+        <li>Unordered list item 3</li>
+      </ul>
+      <li>Unordered list item 4</li>
+      <li>Unordered list item 5</li>
+    </ul>
+    <ol>
+      <li>Ordered list item 1</li>
+      <li>Ordered list item 2</li>
+      <ol>
+        <li>Ordered list item 3</li>
+      </ol>
+      <li>Ordered list item 4</li>
+      <li>Ordered list item 5</li>
+    </ol>
+    <hr />
+    <h2>Form:</h2>
+    <fieldset>
+      <legend>This is a legend on fieldset</legend>
+      <form>
+        <div>
+          <label>Label:</label>
+          <input type="text" placeholder="Text field" />
+        </div>
+        <div>
+          <label>Select box:
+            <select>
+              <optgroup label="Option group">
+                <option>Option 1</option>
+                <option>Option 2</option>
+                <option>Option 3</option>
+              </optgroup>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label>Numeric Field:</label>
+          <input type="number" placeholder="Number" value="0" />
+        </div>
+        <div>
+          <label>Checkboxes:</label>
+          <label>Option 1 <input type="checkbox" checked="" /></label>
+          <label>Option 2 <input type="checkbox" /></label>
+        </div>
+        <div>
+          <label>Radio buttons:</label>
+          <label>Yes <input type="radio" checked="" /></label>
+          <label>No <input type="radio" /></label>
+        </div>
+        <textarea placeholder="Textarea" rows="3" cols="50"></textarea>
+        <input type="submit" value="Submit button" />
+      </form>
+    </fieldset>
+    <br />
+    <button>Button</button>
+    <a href="javascript:void(0)" role="button">Anchor role=button</a>
+    <input type="button" value="Input type=button" />
+    <button disabled="">Button</button>
+    <label>Progress bar</label>
+    <progress value="22" max="100"></progress>
+    <hr />
+    <h2>Table:</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>1</th>
+          <td>Vasanth</td>
+          <td>@vsnthv</td>
+          <td>Chennai, India</td>
+        </tr>
+        <tr>
+          <th>2</th>
+          <td>John</td>
+          <td>@john</td>
+          <td>USA</td>
+        </tr>
+        <tr>
+          <th>3</th>
+          <td>Chan</td>
+          <td>@chan</td>
+          <td>Hong Kong</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Table with <code>border=1</code></p>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>1</th>
+          <td>Vasanth</td>
+          <td>@vsnthv</td>
+          <td>Chennai, India</td>
+        </tr>
+        <tr>
+          <th>2</th>
+          <td>John</td>
+          <td>@john</td>
+          <td>USA</td>
+        </tr>
+        <tr>
+          <th>3</th>
+          <td>Chan</td>
+          <td>@chan</td>
+          <td>Hong Kong</td>
+        </tr>
+      </tbody>
+    </table>
+    <h1>Cards:</h1>
+    <div class="card">
+      <div class="header">
+        Card Header
+      </div>
+      <div class="body">
+        <p>Card Body</p>
+      </div>
+      <div class="footer">
+        <p>Card Footer</p>
+      </div>
+  </body>
+</html>
