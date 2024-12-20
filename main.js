@@ -74,7 +74,7 @@ router.post('/', async (ctx) => {
     const entry = login(passport, password);
     await ctx.cookies.set('passport', entry, {
       httpOnly: true,
-      secure: true, // Set to true in production with HTTPS
+      // secure: true, // Set to true in production with HTTPS
       sameSite: 'strict',
       maxAge: 7 * 24 * 60 * 60, // Convert to milliseconds
       signed: true
