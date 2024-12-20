@@ -1,28 +1,14 @@
-import * as log from 'std/log/mod.ts';
+import { getLogger } from '@logtape/logtape';
 
-log.setup({
-  handlers: {
-    console: new log.handlers.ConsoleHandler('DEBUG'),
-  },
-  loggers: {
-    api: {
-      level: 'DEBUG',
-      handlers: ['console'],
-    },
-  },
-});
-
-export const logger = log.getLogger('api');
-
-export async function loggingMiddleware(ctx, next) {
-  try {
-    await next();
-    logger.info(
-      `${ctx.request.method} - ${ctx.request.url}: ${ctx.response.status} - ${
-        String(ctx.response.body)
-      }`,
-    );
-  } catch (error) {
-    throw error;
-  }
+export async function requestLogger(ctx, next) {
+  const logger = getLogger(['app']).with({ requestId: crypto.randomUUID() });
+  const startTime = new Date();
+  ctx.state.logger = logger;
+  await next();
+  const endTime = new Date();
+  logger.info(
+    `{requestId} ${ctx.request.method} ${ctx.request.url.pathname} - ${String(
+      (endTime - startTime) / 1000
+    )}`
+  );
 }

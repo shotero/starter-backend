@@ -2,6 +2,7 @@
   "version": "4",
   "specifiers": {
     "jsr:@eta-dev/eta@^3.5.0": "3.5.0",
+    "jsr:@logtape/logtape@0.8": "0.8.0",
     "jsr:@oak/commons@1": "1.0.0",
     "jsr:@oak/oak@*": "17.1.3",
     "jsr:@oak/oak@17": "17.1.3",
@@ -30,6 +31,9 @@
   "jsr": {
     "@eta-dev/eta@3.5.0": {
       "integrity": "6b70827efc14c7cbf08498ac7a922ecab003641caf3852a6cb5b1b12ee58fb37"
+    },
+    "@logtape/logtape@0.8.0": {
+      "integrity": "12bdf406a713f754d99c2ff65deb45127ce4e2c59e7136d608042250629428bd"
     },
     "@oak/commons@1.0.0": {
       "integrity": "49805b55603c3627a9d6235c0655aa2b6222d3036b3a13ff0380c16368f607ac",
@@ -784,6 +788,7 @@
   "workspace": {
     "dependencies": [
       "jsr:@eta-dev/eta@^3.5.0",
+      "jsr:@logtape/logtape@0.8",
       "jsr:@oak/oak@^17.1.3",
       "jsr:@std/csv@^1.0.4",
       "jsr:@std/json@^1.0.1",

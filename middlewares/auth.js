@@ -1,13 +1,13 @@
 export async function authenticate(ctx, next) {
   try {
-    const passport = ctx.cookies.get('passport');
+    const passport = await ctx.cookies.get('passport');
+    ctx.state.logger.info(`{requestId} - ${passport} LOGGED IN`);
     if (!passport) {
-      console.log('AUTH: no passport found');
       ctx.response.redirect('/');
     }
     await next();
   } catch (e) {
-    console.log(`AUTH: ${e.message}`);
+    ctx.state.logger.info(`AUTH: ${e.message}`);
     ctx.response.status = 400;
     ctx.response.redirect('/');
   }
