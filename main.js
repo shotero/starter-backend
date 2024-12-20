@@ -8,7 +8,10 @@ import { parse } from '@std/csv/parse';
 
 await configure({
   sinks: { console: getConsoleSink() },
-  loggers: [{ category: 'app', lowestLevel: 'debug', sinks: ['console'] }]
+  loggers: [
+    { category: ['logtape', 'meta'], sinks: ['console'], lowestLevel: 'error' },
+    { category: 'app', lowestLevel: 'debug', sinks: ['console'] }
+  ]
 });
 const logger = getLogger(['app']);
 
@@ -30,6 +33,7 @@ function composePassword(dob) {
 }
 
 function login(passportId, password) {
+  logger.info(`passportid: ${passportId}, password: ${password}`);
   const user = data.find((i) => i[4] === passportId);
   if (user) {
     if (password === composePassword(user[5])) {
