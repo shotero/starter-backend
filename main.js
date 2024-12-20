@@ -81,7 +81,7 @@ router.post('/', async (ctx) => {
     });
     return ctx.response.redirect('/status');
   } catch (e) {
-    logger.error(e);
+    logger.error(e.message);
     return ctx.response.redirect('/?error=WRONG_INFO');
   }
 });
