@@ -34,6 +34,7 @@ function composePassword(dob) {
 
 function login(passportId, password) {
   logger.info(`passportid: ${passportId}, password: ${password}`);
+  logger.debug(data.slice(0, 3));
   const user = data.find((i) => i[4] === passportId);
   if (user) {
     if (password === composePassword(user[5])) {
@@ -78,9 +79,9 @@ router.post('/', async (ctx) => {
       maxAge: 7 * 24 * 60 * 60, // Convert to milliseconds
       signed: true
     });
-
     return ctx.response.redirect('/status');
   } catch (e) {
+    logger.error(e);
     return ctx.response.redirect('/?error=WRONG_INFO');
   }
 });
