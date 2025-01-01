@@ -5,50 +5,50 @@
         <li>
           <label>Name:</label>
           <div>
-            <%= state.user[3] %>
+            <%= state.user.name %>
           </div>
         </li>
         <li>
           <label>Date of Birth:</label>
           <div>
-            <%= state.user[5] %>
+            <%= state.user.dob %>
           </div>
         </li>
         <li>
           <label>Passport No:</label>
           <div>
-            <%= state.user[4] %>
+            <%= state.user.passport %>
           </div>
         </li>
         <li>
           <label>Passport Expiry</label>
           <div>
-            <%= state.user[7] %>
+            <%= state.user.passportExpiry %>
           </div>
         </li>
         <li>
           <label>Age:</label>
           <div>
-            <%= state.user[6] %>
+            <%= state.user.age %>
           </div>
         </li>
         <li>
           <label>Medical Status:</label>
           <div>
-            <%= state.user[8] %>
+            <%= state.user.medicalStatus %>
           </div>
         </li>
         <li>
           <label>Last Status:</label>
           <div>
-            <%= state.user[15] %>
+            <%= state.user.lastStatus %>
           </div>
         </li>
         <hr />
         <li>
           <label>Updates:</label>
           <div>
-            <%~ state.user[16].split('\n').join('<br/>') %>
+            <%~ state.user.updates.split('\n').join('<br/>') %>
           </div>
         </li>
       </ul>

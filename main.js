@@ -5,6 +5,7 @@ import { errorHandler } from '@/middlewares/errorHandler.js';
 import { requestLogger } from '@/middlewares/logger.js';
 import { configure, getConsoleSink, getLogger } from '@logtape/logtape';
 import { parse } from '@std/csv/parse';
+import { difference } from '@std/datetime';
 
 await configure({
   sinks: { console: getConsoleSink() },
@@ -18,27 +19,40 @@ const logger = getLogger(['app']);
 const d = await fetch(Deno.env.get('DATA_FILE'));
 const text = await d.text();
 
-const data = parse(text, { skipFirstRow: false }).filter(
-  (i) => i[0] != '' && i[1] != ''
-);
+const data = parse(text, { skipFirstRow: false })
+  .filter((i) => i[0] != '' && i[1] != '')
+  .map((i) => i.map((i) => i.trim()))
+  .map((i) => {
+    return {
+      order: i[0],
+      createdAt: i[1],
+      id: i[2],
+      name: i[3],
+      passport: i[4],
+      dob: i[5],
+      age: difference(new Date(i[5]), new Date()).years,
+      passportExpiry: new Date(i[7]),
+      medicalStatus: i[8],
+      lastStatus: i[15],
+      updates: i[16]
+    };
+  });
 
 logger.info(`LOADED DATA: ${data.length} entries`);
 
 function getByPassport(passportId) {
-  return data.find((i) => i[4] == passportId);
+  return data.find((i) => i.passport == passportId);
 }
 
 function composePassword(dob) {
-  return dob.trim().replaceAll('/', '');
+  return dob.replaceAll('/', '');
 }
 
 function login(passportId, password) {
-  logger.info(`passportid: ${passportId}, password: ${password}`);
-  logger.debug(data.slice(0, 3));
-  const user = data.find((i) => i[4] === passportId);
+  const user = data.find((i) => i.passport === passportId);
   if (user) {
-    if (password === composePassword(user[5])) {
-      return user[4].trim();
+    if (password === composePassword(user.dob)) {
+      return user;
     } else {
       throw new Error('LOGIN: password mismatch');
     }
@@ -71,8 +85,8 @@ router.post('/', async (ctx) => {
   const password = form.get('password');
 
   try {
-    const entry = login(passport, password);
-    await ctx.cookies.set('passport', entry, {
+    const user = login(passport, password);
+    await ctx.cookies.set('passport', user.passport, {
       httpOnly: true,
       // secure: true, // Set to true in production with HTTPS
       sameSite: 'strict',
